@@ -1,0 +1,32 @@
+{
+  "name": "charttracking",
+  "displayName": "BILproject",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "electron .",
+    "build:pack": "electron-builder --dir",
+    "build:all": "electron-builder --mwl",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux deb tar.xz "
+  },
+  "author": {
+    "name": "finch"
+  },
+  "build": {
+    "appId": "",
+    "mac": {
+      "category": ""
+    }
+  },
+  "dependencies": {
+    "brain": "^1.0.0",
+    "brain.js": "^1.6.1",
+    "json-formatter-js": "^2.2.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "electron": "^4.0.0",
+    "electron-builder": "^20.38.4"
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Test Datapoints</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <div class="card-panel teal lighten-2">
+        Add Test Datapoints
+    </div>
+   
+    <form>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="startPoint" type="number" class="validate" required>
+                <label class="active" for="Starting Point">Starting Point</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="endPoint" type="number" class="validate" required>
+                <label class="active" for="ending Point">Ending Point</label>
+          </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+    </form>
+</body>
+<script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', submitForm);
+    function submitForm(e) {
+        e.preventDefault();
+        const startValue = document.querySelector('#startPoint').value;
+        const endValue = document.querySelector('#endPoint').value;
+        //step 1
+        const datapoints = {ss: startValue, ee: endValue}
+        ipcRenderer.send('dataPoints', datapoints);
+        //ipcRenderer.send('endValue', endValue);
+    }    
+</script>
+</html>

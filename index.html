@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Track Charting Prediction BIL Mini Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <div class="card-panel teal lighten-2">
+        <h3>Chart Tracking Prediction</h3>
+    </div>
+    <div class="row">
+        <button class="btn waves-effect waves-light" type="click" id="runTest">Train model</button>
+        <button class="btn waves-effect waves-light" type="click" id="printResults">Generate Results</button>
+    </div>
+    <div class="row">
+        <button class="btn waves-effect waves-light" type="click" id="boxplot">Boxplot for Training Data</button>
+        <button class="btn waves-effect waves-light" type="click" id="scatter">Scatter for Training Data</button>
+    </div>
+
+    <!-- <div class="row"> -->
+        <p id="dispMsg"></p>
+    <!-- </div> -->
+</body>
+
+<script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+
+    const boxplot = document.querySelector('#boxplot');
+    const scatter = document.querySelector('#scatter');
+    const runTest = document.querySelector('#runTest');
+
+    document.getElementById('boxplot').addEventListener("click",() => {
+        ipcRenderer.send('startBoxplot');
+    },false);
+
+    document.getElementById('scatter').addEventListener("click", () => {
+        ipcRenderer.send('startScatter');
+    });
+
+    document.getElementById('runTest').addEventListener("click", () => {
+        ipcRenderer.send('startTest');
+    });
+
+    ipcRenderer.on('dispMsg', (e,arg) => {
+        let msgg = document.getElementById('dispMsg');
+        msgg.innerHTML = arg.msg;
+    });
+    //results printing
+    document.getElementById('printResults').addEventListener("click", () => {
+        ipcRenderer.send('startPrintResults');
+    });
+    /*
+    //remove prompt msg
+    document.getElementById('dispMsg').addEventListener("dblclick",removeMsg);
+    function removeMsg(ee) {
+        ee.target.remove();  
+    }
+    */
+
+    document.getElementById("dispMsg").addEventListener("dblclick", myFunction);
+
+    function myFunction(e) {
+	    e.target.remove();
+    }
+
+
+</script>
+</html>
