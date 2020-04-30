@@ -4,7 +4,7 @@ const brain = require('brain.js');
 const plotlib = require('nodeplotlib');     
 
 //take user input from command line
-const prompt = require('prompt-sync')({sigint: true});
+// const prompt = require('prompt-sync')({sigint: true});
 
 //write output to file
 const fs = require('fs');
